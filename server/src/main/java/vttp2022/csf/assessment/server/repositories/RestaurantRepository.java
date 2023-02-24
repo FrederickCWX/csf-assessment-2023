@@ -3,6 +3,7 @@ package vttp2022.csf.assessment.server.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -39,12 +40,16 @@ public class RestaurantRepository {
 	// Write the Mongo native query above for this method
 
 	// db.getCollection("restaurants").find({"cuisine": "cuisine name"})
-	public List<String> getRestaurantsByCuisine(String cuisine) {
+	public List<Restaurant> getRestaurantsByCuisine(String cuisine) {
 		// Implmementation in here
 		Criteria c = Criteria.where("cuisine").in(cuisine);
 		Query q = Query.query(c);
 
-		return mongoTemplate.find(q, String.class, C_RESTAURANTS);
+		return mongoTemplate.find(q, Document.class, C_RESTAURANTS)
+				.stream()
+				.map(d -> Restaurant.create(d))
+				.toList(); 
+
 	}
 
 	// TODO Task 4

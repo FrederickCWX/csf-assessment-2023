@@ -1,5 +1,5 @@
 <h1>List of Cuisines</h1>
 
 <table *ngFor="let r of restaurants; let i of index">
-  <tr><button>{{r.cuisine}}</button></tr>
+  <tr><button (click)="showCuisineList()">{{r.cuisine}}</button></tr>
 </table>

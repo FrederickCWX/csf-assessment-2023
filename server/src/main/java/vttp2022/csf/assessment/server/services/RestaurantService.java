@@ -1,5 +1,6 @@
 package vttp2022.csf.assessment.server.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class RestaurantService {
 	// Use the following method to get a list of cuisines 
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
-	public ??? getCuisines(???) {
+	public List<String> getCuisines() {
 		// Implmementation in here
 		
 	}

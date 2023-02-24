@@ -1,5 +1,7 @@
 package vttp2022.csf.assessment.server.models;
 
+import org.bson.Document;
+
 // Do not modify this class
 public class Restaurant {
 	
@@ -50,5 +52,15 @@ public class Restaurant {
 	}
 	public String getMapURL() {
 		return this.mapUrl;
+	}
+
+	public static Restaurant create(Document d) {
+		final Restaurant restaurant = new Restaurant();
+		restaurant.setRestaurantId(d.getString("restaurant_id"));
+		restaurant.setName(d.getString("name"));
+		restaurant.setCuisine(d.getString("cuisine"));
+		restaurant.setAddress(d.getString("address"));
+
+		return restaurant;
 	}
 }
