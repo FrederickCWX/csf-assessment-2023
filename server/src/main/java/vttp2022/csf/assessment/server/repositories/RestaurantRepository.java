@@ -1,23 +1,35 @@
 package vttp2022.csf.assessment.server.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import vttp2022.csf.assessment.server.models.Comment;
 import vttp2022.csf.assessment.server.models.Restaurant;
 
+@Repository
 public class RestaurantRepository {
+
+	public static final String C_RESTAURANTS = "restaurants";
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
 	// TODO Task 2
 	// Use this method to retrive a list of cuisines from the restaurant collection
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
-	//  
-	public ??? getCuisines(???) {
-		// Implmementation in here
 
+	//  db.getCollection("restaurants").distinct('cuisine')
+	public List<String> getCuisines() {
+		// Implmementation in here
+		return mongoTemplate.findDistinct(new Query(), "cuisine", C_RESTAURANTS,String.class);
 	}
 
 	// TODO Task 3
@@ -25,10 +37,14 @@ public class RestaurantRepository {
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
-	//  
-	public ??? getRestaurantsByCuisine(???) {
-		// Implmementation in here
 
+	// db.getCollection("restaurants").find({"cuisine": "cuisine name"})
+	public List<String> getRestaurantsByCuisine(String cuisine) {
+		// Implmementation in here
+		Criteria c = Criteria.where("cuisine").in(cuisine);
+		Query q = Query.query(c);
+
+		return mongoTemplate.find(q, String.class, C_RESTAURANTS);
 	}
 
 	// TODO Task 4
@@ -36,10 +52,11 @@ public class RestaurantRepository {
 	// You can add any parameters (if any) 
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
 	// Write the Mongo native query above for this method
-	//  
-	public Optional<Restaurant> getRestaurant(???) {
+
+	// db.getCollection("restaurants").find({"restaurant_id": "restaurantId"})
+	public Optional<Restaurant> getRestaurant(String restaurantId) {
 		// Implmementation in here
-		
+		return null;
 	}
 
 	// TODO Task 5
